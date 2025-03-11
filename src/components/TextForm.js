@@ -94,14 +94,21 @@ function listenFun() {
 
 }
 
-function extraSpaceFun() {
+function removeSpaceFun() {
 // let res = text.split(" ").join("");
 let res = text.replaceAll(" ","")
 setText(res)
 
-props.showAlerts("success","remove extra space")
+props.showAlerts("success","remove space")
 
 }
+function removeExtraSpaceFun() {
+  let res = text.replace(/\s+/g, " ").trim();
+  setText(res);
+
+  props.showAlerts("success" ,"Extra spaces removed!");
+}
+
 
 
 function reverseFun() {
@@ -132,7 +139,8 @@ props.showAlerts("success","reverse")
 <button className='btn btn-primary mx-1' onClick={extractCharFun} >Extract character</button>
 <button className='btn btn-primary mx-1' onClick={speakFun} >Speak</button>
 <button className='btn btn-primary mx-1' onClick={listenFun} >Mic</button>
-<button className='btn btn-primary mx-1 my-2' onClick={extraSpaceFun} >Remove Extra Space</button>
+<button className='btn btn-primary mx-1 my-2' onClick={removeSpaceFun} >Remove Space</button>
+<button className='btn btn-primary mx-1 my-2' onClick={removeExtraSpaceFun} >Remove Extra Space</button>
 <button className='btn btn-primary mx-1 my-2' onClick={reverseFun} >reverse</button>
 </div>
 
@@ -141,7 +149,7 @@ props.showAlerts("success","reverse")
   {/* <p >words: {text.split(' ').length}</p> */}
   {/* <p >words: {text.trim() === "" ? 0 : text.trim().split(' ').length}</p> */}
   <p>Words: {text.trim() === "" ? 0 : text.trim().split(/\s+/).length}</p>
-  <p>character: {text.trim() === "" ? 0 : text.trim().length}</p>
+  <p>Characters: {text.replace(/\s/g, "").length}</p>
   {/* <p>{0.008*text.split(' ').length} Minutes read</p> */}
   <h2>Preview</h2>
   <p>{text?text:"Nothing to preview!!"}</p>
